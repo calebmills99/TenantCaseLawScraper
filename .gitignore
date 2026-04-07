@@ -1,0 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment created by uv
+.venv/
+
+# uv lock file is intentionally committed (uv.lock)
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# Test cache
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
