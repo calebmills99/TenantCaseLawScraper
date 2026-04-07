@@ -38,18 +38,22 @@
 
   You need a CourtListener API token. It's **free**. Don't whine.
 
-  ```bash
   # Step 1. Get the token. Go here. Sign up. It takes thirty seconds.
-  #   https://www.courtlistener.com/sign-in/
+    https://www.courtlistener.com/sign-in/
 
   # Step 2. Install the thing.
+   ```bash
   uv sync --extra justia    # or just `uv sync` if you don't want Justia
+  ```
 
   # Step 3. Put your token where the scraper can find it.
+   ```bash
   cp .env.example .env
   # Now open .env and paste your token. Don't email it to me.
-
+  ```
+   ```bash
   source .env
+  ```
 
   If you see a 403 error, your token is missing or expired. That's not a bug.
   That's you.
@@ -58,23 +62,34 @@
   How to use it
 
   # Search for one thing.
+  ```bash
   uv run python scraper.py --search "unpermitted unit RSO" --after 2020-01-01
-
+  ```
   # Run all twelve preset queries. Go make coffee.
+  ```bash
   uv run python scraper.py --run-all --after 2018-01-01
+```
 
   # Find every case that cites Carter v. Cohen.
+   ```bash
   uv run python scraper.py --cite "Carter v. Cohen"
+```
 
   # Find citations for ALL the seed cases.
+   ```bash
   uv run python scraper.py --cite-all
+ ```
 
   # Tell me what's in the database.
+  ```bash
   uv run python scraper.py --report
+```
 
   # Get your data out.
+   ```bash
   uv run python scraper.py --export-json
   uv run python scraper.py --export-csv
+ ```
 
   Everything goes into tenant_case_law.db. Re-running a search never
   overwrites good data with bad data — the scoring uses MAX semantics. I built
@@ -85,7 +100,7 @@
 
   If you're researching unpermitted-unit cases and you don't recognize these
   names, close this README and go read them first. Come back when you're ready.
-
+   ```bash
   ┌─────────────────────────────┬───────────────────────┬──────────────────────────────────────────────────────────┐
   │            Case             │         Cite          │                      Why it matters                      │
   ├─────────────────────────────┼───────────────────────┼──────────────────────────────────────────────────────────┤
@@ -104,7 +119,7 @@
   │ Combiner v. Swartz          │ 167 Cal.App.4th 1365  │ The landlord cannot wiggle out of the RSO by claiming    │
   │                             │ (2008)                │ you "agreed" to it.                                      │
   └─────────────────────────────┴───────────────────────┴──────────────────────────────────────────────────────────┘
-
+  ```
   ---
   A word about Justia
 
@@ -118,15 +133,15 @@
   to be an opinion.
 
   If you turn it on with --include-justia, you'll see a line like:
-
+   ```bash
   [JUS] fetched=240 kept=12 filtered_out=221 stubs=7
-
+  ```
   That's the filter working. If kept ever looks suspiciously close to fetched,
   something has regressed and I want to know about it.
 
   ---
   What's in the box
-
+   ```bash
   scraper.py              # The whole show. ~970 lines. Single file. Deal with it.
   requirements.txt        # For pip people.
   pyproject.toml          # For uv people. We prefer uv people.
@@ -134,17 +149,17 @@
   README.md               # You are here.
   CLAUDE.md               # Notes for the AI assistant. You can ignore it.
   tenant_case_law.db      # The database. Created on first run. Gitignored.
-
+ ```
   ---
   Things I do not want to hear
-
+   ```bash
   - "It's not finding any cases." → Did you set CL_API_TOKEN?
   - "Justia isn't working." → Did you uv sync --extra justia?
   - "The database is huge." → It's case law. Of course it is.
   - "Can it scrape Google Scholar?" → No. They'd ban us in an hour.
   - "Why is the score for my case only 0.4?" → Because it's only sort of relevant.
   That's the whole point.
-
+   ```
   ---
   License
 
